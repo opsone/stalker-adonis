@@ -1,0 +1,9 @@
+{{{
+  exports({ to: app.configPath('stalker.ts') })
+}}}
+import { defineConfig } from '@opsone/stalker'
+import env from '#start/env'
+
+export default defineConfig({
+  access_token: env.get('STALKER_TOKEN')
+})
