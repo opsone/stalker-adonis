@@ -3,7 +3,6 @@ import type { RouteGroup } from '@adonisjs/core/http'
 import type { StalkerConfig } from '../src/types/config.js'
 import StalkerManager from '../src/stalker_manager.js'
 
-
 export default class StalkerProvider {
   constructor(protected app: ApplicationService) {}
 
@@ -23,7 +22,6 @@ export default class StalkerProvider {
         router.get(pattern, [DependenciesController])
       })
     }
-
   }
 }
 
