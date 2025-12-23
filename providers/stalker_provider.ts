@@ -15,11 +15,18 @@ export default class StalkerProvider {
 
   async start() {
     const router = await this.app.container.make('router')
+    const config = this.app.config.get<StalkerConfig>('stalker', {})
     const DependenciesController = () => import('../src/controllers/dependencies_controller.js')
 
-    router.stalker = (pattern: string = '/stalker') => {
+    router.stalker = (pattern: string = '/stalker/dependencies') => {
       return router.group(() => {
         router.get(pattern, [DependenciesController])
+      }).use((ctx, next) => {
+        const qs = ctx.request.qs()
+        if (qs.token !== config.access_token) {
+          return ctx.response.unauthorized('Unauthorized')
+        }
+        return next()
       })
     }
   }
