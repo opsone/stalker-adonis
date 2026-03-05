@@ -40,7 +40,7 @@ export default class NpmService extends BaseService {
     const { stdout } = await $({ reject: false })`${this.config.npmBin!} list --depth=0`
 
     // Parse each line and extract packages
-    const regex = /^[├└]── (.+)@([\d.]+)$/
+    const regex = /^[├└]── (?:UNMET DEPENDENCY )?(.+)@[\^~]?([\d.]+)$/
 
     return stdout
       .split('\n')
